@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.mindbenders.R
+import com.example.mindbenders.navigation.ROUTE_ABOUT
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,7 +49,10 @@ fun HomeScreen(navController: NavController) {
             contentScale = ContentScale.FillBounds
         )
     }
-    Column() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         TopAppBar(
             title = { Text(text = "Mind Benders") },
             navigationIcon = {
@@ -80,7 +85,8 @@ fun HomeScreen(navController: NavController) {
             }
 
         )
-        Row(modifier = Modifier.wrapContentWidth()) {
+        Row(modifier = Modifier.wrapContentWidth())
+        {
             Card(modifier = Modifier.padding(15.dp),
                 shape = RoundedCornerShape(20.dp),
                 elevation = CardDefaults.cardElevation(10.dp)
@@ -102,7 +108,7 @@ fun HomeScreen(navController: NavController) {
 
                             , fontStyle = FontStyle.Normal
                             , color = Color.Black
-                            , text = "KEEP LIFE SIMPLE")
+                            , text = "SAVINGS ACCOUNT")
 
                     }
 
@@ -136,7 +142,7 @@ fun HomeScreen(navController: NavController) {
 
                             , fontStyle = FontStyle.Normal
                             , color = Color.Black
-                            , text = "SELF CARE" +
+                            , text = "DEPOSIT MONEY" +
                                     "")
 
                     }
@@ -176,13 +182,94 @@ fun HomeScreen(navController: NavController) {
 
                             , fontStyle = FontStyle.Normal
                             , color = Color.Black
-                            , text = "LIVE SESSIONS" +
-                                    "")
+                            , text = "LIVE SESSIONS")
 
                     }
 
                 }
 
+
+
+
+
+
+
+
+            }
+            Card(
+                onClick = {
+                    navController.navigate(ROUTE_ABOUT)
+
+                },
+                modifier = Modifier.padding(15.dp),
+                shape = RoundedCornerShape(20.dp),
+                elevation = CardDefaults.cardElevation(10.dp)
+            )
+            {
+                Box(
+
+                    modifier = Modifier.height(100.dp))
+                {
+                    Image(
+                        painter = painterResource(id = R.drawable.music),
+                        contentDescription = "Image",
+
+                        )
+                    Box(
+
+                        modifier = Modifier
+                        .matchParentSize()
+                        .padding(10.dp),
+                        contentAlignment = Alignment.Center){
+                        Text(fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+
+                            , fontStyle = FontStyle.Normal
+                            , color = Color.Black
+                            , text = "ABOUT COMPANY")
+
+                    }
+
+                }
+
+
+
+
+
+
+
+
+            }
+
+        }
+        Row(modifier = Modifier.wrapContentWidth())
+        {
+            Card(modifier = Modifier.padding(15.dp),
+                shape = RoundedCornerShape(20.dp),
+                elevation = CardDefaults.cardElevation(10.dp)
+            )
+            {
+                Box(modifier = Modifier.height(100.dp))
+                {
+                    Image(
+                        painter = painterResource(id = R.drawable.music),
+                        contentDescription = "Image",
+
+                        )
+                    Box(modifier = Modifier
+                        .matchParentSize()
+                        .padding(15.dp),
+                        contentAlignment = Alignment.Center){
+                        Text(fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+
+                            , fontStyle = FontStyle.Normal
+                            , color = Color.Black
+                            , text ="ADD NEW CLIENTS")
+
+                    }
+
+                }
 
 
 
@@ -205,15 +292,14 @@ fun HomeScreen(navController: NavController) {
                         )
                     Box(modifier = Modifier
                         .matchParentSize()
-                        .padding(10.dp),
+                        .padding(15.dp),
                         contentAlignment = Alignment.Center){
                         Text(fontWeight = FontWeight.Bold,
                             fontSize = 20.sp
 
                             , fontStyle = FontStyle.Normal
                             , color = Color.Black
-                            , text = "LIVE SESSIONS" +
-                                    "")
+                            , text = "VIEW ALL CLIENTS")
 
                     }
 

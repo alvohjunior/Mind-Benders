@@ -1,4 +1,5 @@
-package com.example.mindbenders.ui.theme.screens.register
+package com.example.mindbenders.ui.theme.screens.login
+
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -41,19 +42,18 @@ import com.example.mindbenders.R
 import com.example.mindbenders.ui.theme.MindBendersTheme
 
 @Composable
-fun Greeting(name: String, navController: NavController) {
-    var firstName by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var emailAddress by remember { mutableStateOf("") }
+fun Login(navController: NavController) {
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
+            .background(Color.Cyan)
             .padding(16.dp)
     ) {
         Text(
-            text = "Good Morning $name",
+            text = "Please Login First",
             fontSize = 20.sp,
             color = Color.Blue,
             fontFamily = FontFamily.SansSerif,
@@ -76,10 +76,10 @@ fun Greeting(name: String, navController: NavController) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = firstName,
-            onValueChange = { firstName = it },
-            label = { Text(text = "Enter First Name") },
-            placeholder = { Text(text = "Please enter your first name") },
+            value = username,
+            onValueChange = { username = it },
+            label = { Text(text = "Enter UserName") },
+            placeholder = { Text(text = "Please enter your username") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally)
@@ -87,23 +87,12 @@ fun Greeting(name: String, navController: NavController) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        OutlinedTextField(
-            value = lastName,
-            onValueChange = { lastName = it },
-            label = { Text(text = "Enter Last Name") },
-            placeholder = { Text(text = "Please enter your last name") },
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally)
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = emailAddress,
-            onValueChange = { emailAddress = it },
-            label = { Text(text = "Enter Email Address") },
-            placeholder = { Text(text = "Please enter your email address") },
+            value = password,
+            onValueChange = { password = it },
+            label = { Text(text = "Enter Password") },
+            placeholder = { Text(text = "Please enter your password") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally)
@@ -115,13 +104,13 @@ fun Greeting(name: String, navController: NavController) {
             onClick = {
                 // Implement registration action
             },
-            colors = ButtonDefaults.buttonColors(Color.Green),
+            colors = ButtonDefaults.buttonColors(Color.Red),
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally)
         ) {
             Text(
-                text = "REGISTER HERE",
+                text = "LOGIN HERE",
                 modifier = Modifier.padding(5.dp)
             )
         }
@@ -136,10 +125,10 @@ fun Greeting(name: String, navController: NavController) {
                 onClick = {
                     // Implement login action
                 },
-                colors = ButtonDefaults.buttonColors(Color.Magenta)
+                colors = ButtonDefaults.buttonColors(Color.Green)
             ) {
                 Text(
-                    text = "LOGIN HERE",
+                    text = "REGISTER HERE",
                     modifier = Modifier.padding(5.dp)
                 )
             }
@@ -148,7 +137,7 @@ fun Greeting(name: String, navController: NavController) {
                 onClick = {
                     // Implement forgot password action
                 },
-                colors = ButtonDefaults.buttonColors(Color.Red)
+                colors = ButtonDefaults.buttonColors(Color.Magenta)
             ) {
                 Text(
                     text = "FORGOT PASSWORD",
@@ -161,8 +150,8 @@ fun Greeting(name: String, navController: NavController) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview() {
+fun LoginPreview() {
     MindBendersTheme {
-        Greeting("Alvin", rememberNavController())
+        Login(rememberNavController())
     }
 }
