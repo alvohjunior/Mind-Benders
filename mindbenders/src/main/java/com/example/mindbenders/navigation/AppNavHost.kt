@@ -13,7 +13,7 @@ import com.example.mindbenders.ui.theme.screens.register.Greeting
 
 @Composable
 fun AppNavHost(navController:NavHostController= rememberNavController(),
-               startDestination: String = ROUTE_REGISTER){
+               startDestination: String = ROUTE_ADD_CLIENT){
               NavHost(navController=navController,
                   startDestination=startDestination){
                   composable(ROUTE_REGISTER){ Greeting("Alvin",navController)}

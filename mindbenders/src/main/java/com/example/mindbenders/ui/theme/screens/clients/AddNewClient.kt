@@ -1,6 +1,7 @@
 package com.example.mindbenders.ui.theme.screens.clients
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -45,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -55,24 +57,27 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.mindbenders.R
+import com.example.mindbenders.data.ClientViewModel
 
 
 @Composable
 fun AddClient(navController: NavController){
+    val context = LocalContext.current
+
     val imageuri = rememberSaveable() {
-        mutableStateOf(value = "")
+        mutableStateOf<Uri?>(value = null)
     }
     val painter = rememberImagePainter(
-        if (imageuri.value.isEmpty())
-        R.drawable.ic_photo
-    else
-        imageuri.value
+       data = imageuri.value ?: R.drawable.ic_photo,
+       builder = {
+           crossfade(true)
+       } 
     )
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ){
         uri: Uri? ->
-        uri?.let { imageuri.value = it.toString() }
+        uri?.let { imageuri.value = it }
     }
 
 
@@ -144,12 +149,21 @@ fun AddClient(navController: NavController){
                 Button(onClick = { /*TODO*/ }) {
                     Text(text = "GO BACK")}
 
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick = {
+                    val clientRepository = ClientViewModel(navController, context)
+                    imageuri.value?.let { uri ->
+                        clientRepository
+                            .saveClient(uri, firstname,lastname,gender,age, bio)
+                    } ?: run { Toast.makeText(context,"Please select an image",
+                        Toast.LENGTH_LONG).show() }
+
+                }) {
                     Text(text = "SAVE")}
 
             }
             Column (
-                modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ){
                 Card (
                     shape = CircleShape,

@@ -76,6 +76,8 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.vertexai)
     implementation(libs.material)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)

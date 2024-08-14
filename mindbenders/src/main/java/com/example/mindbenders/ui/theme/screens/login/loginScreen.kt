@@ -102,8 +102,8 @@ fun Login(navController: NavController) {
 
         Button(
             onClick = {
-                // Implement registration action
-            },
+                val mylogin = AuthViewModel(navController, context)
+                mylogin.login(emailAddress.trim(), password.trim())            },
             colors = ButtonDefaults.buttonColors(Color.Red),
             modifier = Modifier
                 .wrapContentWidth()
@@ -134,10 +134,7 @@ fun Login(navController: NavController) {
             }
 
             Button(
-                onClick = {
-                    val login = AuthViewModel(navController, context)
-                    login.login(emailAddress.trim() ,  password.trim())
-                                 },
+                onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(Color.Magenta)
             ) {
                 Text(
