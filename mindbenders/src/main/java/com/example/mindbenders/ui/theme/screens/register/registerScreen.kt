@@ -1,17 +1,14 @@
 package com.example.mindbenders.ui.theme.screens.register
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -38,15 +36,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.mindbenders.R
-import com.example.mindbenders.navigation.ROUTE_HOME
+import com.example.mindbenders.data.AuthViewModel
 import com.example.mindbenders.navigation.ROUTE_LOGIN
 import com.example.mindbenders.ui.theme.MindBendersTheme
 
+
 @Composable
 fun Greeting(name: String, navController: NavController) {
+    val context = LocalContext.current
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var emailAddress by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -55,7 +56,7 @@ fun Greeting(name: String, navController: NavController) {
             .padding(16.dp)
     ) {
         Text(
-            text = "Good Morning $name",
+            text = "Hi there! $name",
             fontSize = 20.sp,
             color = Color.Blue,
             fontFamily = FontFamily.SansSerif,
@@ -110,12 +111,26 @@ fun Greeting(name: String, navController: NavController) {
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally)
         )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text(text = "Enter Password") },
+            placeholder = { Text(text = "Please enter your Password") },
+            modifier = Modifier
+                .wrapContentWidth()
+                .align(Alignment.CenterHorizontally)
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         Button(
             onClick = {
-                       navController.navigate(ROUTE_HOME)
+
+                val register = AuthViewModel(navController, context)
+                register.signup(firstName.trim(), lastName.trim(),emailAddress.trim(),password.trim())
+                navController.navigate(ROUTE_LOGIN)
             },
             colors = ButtonDefaults.buttonColors(Color.Green),
             modifier = Modifier
@@ -160,6 +175,8 @@ fun Greeting(name: String, navController: NavController) {
         }
     }
 }
+
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

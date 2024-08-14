@@ -19,9 +19,21 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -80,117 +92,147 @@ fun AddClient(navController: NavController){
         mutableStateOf(value = "")
     }
 
+    Scaffold (
+        bottomBar = {
+            BottomAppBar (
+                actions = {
+                   IconButton(onClick = { /*TODO*/ }) {
+                       Image(Icons.Filled.Home, contentDescription = "")
+                   }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Image(Icons.Filled.Settings, contentDescription = "")
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Image(Icons.Filled.Email, contentDescription = "")
+                    }
+                },
+                floatingActionButton = {
+                    FloatingActionButton(onClick = { /*TODO*/ },
+                    containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
+                    elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
+                    ) {
+                        Icon(Icons.Filled.AccountCircle, contentDescription = "")
+                    }
+
+                }
+            )
 
 
-
-
-
-    Column (
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(10.dp)
-            .fillMaxWidth()
-    ){
-        Text(text = "INSERT NEW CLIENT",
-            fontStyle = FontStyle.Normal,
-            fontWeight = FontWeight.Bold,
-            fontSize = 25.sp,
-            textAlign = TextAlign.Center,
+        }
+    ){innerPadding ->
+        Column (
             modifier = Modifier
-                .fillMaxWidth()
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
                 .padding(10.dp)
-                .background(Color.Magenta))
-        Row (modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth()
         ){
+            Text(text = "INSERT NEW CLIENT",
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.Bold,
+                fontSize = 25.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .background(Color.Magenta))
+            Row (modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ){
                 Button(onClick = { /*TODO*/ }) {
                     Text(text = "GO BACK")}
 
                 Button(onClick = { /*TODO*/ }) {
                     Text(text = "SAVE")}
 
-        }
-        Column (
-            modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            Card (
-                shape = CircleShape,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .size(180.dp)
-            ){
-                Image(painter = painter,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .clickable { launcher.launch("image/*") },
-                    contentScale = ContentScale.Crop)
-
             }
-            Text(text = "Change Picture Here")
+            Column (
+                modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                Card (
+                    shape = CircleShape,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .size(180.dp)
+                ){
+                    Image(painter = painter,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .clickable { launcher.launch("image/*") },
+                        contentScale = ContentScale.Crop)
+
+                }
+                Text(text = "Change Picture Here")
+            }
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .align(Alignment.CenterHorizontally),
+                label = {Text(text = "Enter First Name")},
+                placeholder =  {Text(text = "Please Enter First Name")},
+                value = firstname ,
+                onValueChange ={
+                        newName -> firstname = newName
+                } )
+            Spacer(modifier = Modifier.height(10.dp))
+            OutlinedTextField(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .align(Alignment.CenterHorizontally),
+                label = {Text(text = "Enter Last Name")},
+                placeholder =  {Text(text = "Please Enter Last Name")},
+                value = lastname ,
+                onValueChange ={
+                        newName -> lastname = newName
+                } )
+            Spacer(modifier = Modifier.height(10.dp))
+            OutlinedTextField(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .align(Alignment.CenterHorizontally),
+                label = {Text(text = "Enter Your Gender")},
+                placeholder =  {Text(text = "Please Enter Your Gender")},
+                value = gender ,
+                onValueChange ={
+                        newName -> gender = newName
+                } )
+            Spacer(modifier = Modifier.height(10.dp))
+            OutlinedTextField(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .align(Alignment.CenterHorizontally),
+                label = {Text(text = "Enter Your Age")},
+                placeholder =  {Text(text = "Please Enter Your Age")},
+                value = age ,
+                onValueChange ={
+                        newName -> age = newName
+                } )
+            Spacer(modifier = Modifier.height(10.dp))
+            OutlinedTextField(
+                modifier = Modifier
+                    .height(160.dp)
+                    .wrapContentWidth()
+                    .align(Alignment.CenterHorizontally),
+                label = {Text(text = "Enter Your Description")},
+                placeholder =  {Text(text = "Please Enter Your Bio")},
+                value = bio ,
+                singleLine = false,
+                onValueChange ={
+                        newName -> bio = newName
+                } )
+
+
         }
-
-        OutlinedTextField(
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-            label = {Text(text = "Enter First Name")},
-            placeholder =  {Text(text = "Please Enter First Name")},
-            value = firstname ,
-            onValueChange ={
-                newName -> firstname = newName
-            } )
-        Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-            label = {Text(text = "Enter Last Name")},
-            placeholder =  {Text(text = "Please Enter Last Name")},
-            value = lastname ,
-            onValueChange ={
-                    newName -> lastname = newName
-            } )
-        Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-            label = {Text(text = "Enter Your Gender")},
-            placeholder =  {Text(text = "Please Enter Your Gender")},
-            value = gender ,
-            onValueChange ={
-                    newName -> gender = newName
-            } )
-        Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-            label = {Text(text = "Enter Your Age")},
-            placeholder =  {Text(text = "Please Enter Your Age")},
-            value = age ,
-            onValueChange ={
-                    newName -> age = newName
-            } )
-        Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
-            modifier = Modifier
-                .height(160.dp)
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-            label = {Text(text = "Enter Your Description")},
-            placeholder =  {Text(text = "Please Enter Your Bio")},
-            value = bio ,
-            singleLine = false,
-            onValueChange ={
-                    newName -> bio = newName
-            } )
-
 
     }
+
+
+
+
 }
 
 @Preview(showBackground = true, showSystemUi = true)

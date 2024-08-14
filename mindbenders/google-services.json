@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "210431969819",
+    "project_id": "mindbenders-4cf59",
+    "storage_bucket": "mindbenders-4cf59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210431969819:android:e430f45129aa3d87f306be",
+        "android_client_info": {
+          "package_name": "com.example.mindbenders"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp3MoEb3Qk_MueHn2-cyRki7VxSTHxDfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

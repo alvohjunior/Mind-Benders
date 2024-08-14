@@ -1,18 +1,15 @@
 package com.example.mindbenders.ui.theme.screens.login
 
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -39,11 +37,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.mindbenders.R
+import com.example.mindbenders.data.AuthViewModel
 import com.example.mindbenders.ui.theme.MindBendersTheme
 
 @Composable
 fun Login(navController: NavController) {
-    var username by remember { mutableStateOf("") }
+    var context = LocalContext.current
+    var emailAddress by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column(
@@ -76,10 +76,10 @@ fun Login(navController: NavController) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text(text = "Enter UserName") },
-            placeholder = { Text(text = "Please enter your username") },
+            value = emailAddress,
+            onValueChange = { emailAddress = it },
+            label = { Text(text = "Enter EmailAddress") },
+            placeholder = { Text(text = "Please enter your EmailAddress") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally)
@@ -135,8 +135,9 @@ fun Login(navController: NavController) {
 
             Button(
                 onClick = {
-                    // Implement forgot password action
-                },
+                    val login = AuthViewModel(navController, context)
+                    login.login(emailAddress.trim() ,  password.trim())
+                                 },
                 colors = ButtonDefaults.buttonColors(Color.Magenta)
             ) {
                 Text(
