@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -38,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.mindbenders.R
 import com.example.mindbenders.data.AuthViewModel
+import com.example.mindbenders.navigation.ROUTE_HOME
 import com.example.mindbenders.ui.theme.MindBendersTheme
 
 @Composable
@@ -49,6 +52,7 @@ fun Login(navController: NavController) {
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
+            .verticalScroll(rememberScrollState())
             .background(Color.Cyan)
             .padding(16.dp)
     ) {
@@ -103,7 +107,8 @@ fun Login(navController: NavController) {
         Button(
             onClick = {
                 val mylogin = AuthViewModel(navController, context)
-                mylogin.login(emailAddress.trim(), password.trim())            },
+                mylogin.login(emailAddress.trim(), password.trim())
+                      navController.navigate(ROUTE_HOME)},
             colors = ButtonDefaults.buttonColors(Color.Red),
             modifier = Modifier
                 .wrapContentWidth()

@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -52,6 +54,7 @@ fun Greeting(name: String, navController: NavController) {
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
+            .verticalScroll(rememberScrollState())
             .background(Color.White)
             .padding(16.dp)
     ) {
